@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace bit285_lucky_number_database.Controllers
 {
@@ -14,20 +15,57 @@ namespace bit285_lucky_number_database.Controllers
         // GET: LuckyNumber
         public ActionResult Spin()
         {
-            LuckyNumber myLuck = new LuckyNumber { Number = 7, Balance = 4 };
-            return View(myLuck);
+
+            //LuckyNumber myLuck = new LuckyNumber { Number = 7, Balance = 4 };
+
+            //dbc.LuckyNumbers.Add(myLuck);
+            //dbc.SaveChanges();
+
+            //return View(myLuck);
+            return View();
         }
 
         [HttpPost]
         public ActionResult Spin(LuckyNumber lucky)
         {
-            if(lucky.Balance>0)
+
+            LuckyNumber databaseLuck = dbc.LuckyNumbers.Where(m => m.LuckyNumberID == (int)Session["currentID"]);
+            //change the balance in the database
+            //if (lucky.Balance>0)
+            //{
+            //lucky.Balance -= 1;
+
+            //}
+
+
+
+            if (databaseLuck.Balance > 0)
             {
-                lucky.Balance -= 1;
+                databaseLuck.Balance -= 1;
+
             }
+            //update number in the database using the form submission value
+            databaseLuck.Number = lucky.Number;
 
+            dbc.SaveChanges();
+            //return View(lucky);
+            return View(databaseLuck);
 
-            return View(lucky);
+        }
+
+        
+        [HttpPost]
+        public ActionResult Index(LuckyNumber lucky)
+        {
+            dbc.LuckyNumbers.Add(lucky);
+            dbc.SaveChanges();
+            Session["currentID"] = lucky.LuckyNumberID;
+
+            return View("Spin");
+        }
+        public ActionResult Index(lucky)
+        {
+            return View();
         }
     }
 }

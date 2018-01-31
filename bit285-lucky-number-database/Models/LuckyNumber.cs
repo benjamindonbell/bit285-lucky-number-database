@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
+using System.Web.Mvc;
 
 namespace lucky_number_database.Models
 {
@@ -12,11 +14,16 @@ namespace lucky_number_database.Models
         private int[] _spinner = new int[3];
         private decimal _balance;
 
+        [Key]
+        public int LuckyNumberID { get; set; }
+
+        public string Name { get; set; }
+
         [Required]
         [Display(Name = "Lucky Number")]
         [Range(1,9,ErrorMessage ="The Lucky Number must be a number from 1 to 9")]
         public int Number { get; set; }
-
+       
         [Required]
         public decimal Balance {
             set
@@ -53,5 +60,7 @@ namespace lucky_number_database.Models
                 return _spinner;
             }
         }
+
+        public 
     }
 }
