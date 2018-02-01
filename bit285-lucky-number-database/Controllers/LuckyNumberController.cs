@@ -16,15 +16,18 @@ namespace bit285_lucky_number_database.Controllers
         //public ActionResult Spin()
         //{
 
-            //LuckyNumber myLuck = new LuckyNumber { Number = 7, Balance = 4 };
+        //LuckyNumber myLuck = new LuckyNumber { Number = 7, Balance = 4 };
 
-            //dbc.LuckyNumbers.Add(myLuck);
-            //dbc.SaveChanges();
+        //dbc.LuckyNumbers.Add(myLuck);
+        //dbc.SaveChanges();
 
-            //return View(myLuck);
-           // return View( );
+        //return View(myLuck);
+        // return View( );
         //}
-
+        public ActionResult Spin()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult Spin(LuckyNumber lucky)
         {
