@@ -61,6 +61,6 @@ namespace lucky_number_database.Models
             }
         }
 
-        public 
+        //public 
     }
 }
